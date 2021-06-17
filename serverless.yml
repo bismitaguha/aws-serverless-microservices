@@ -1,0 +1,15 @@
+plugins:
+  - serverless-plugin-microservices
+ 
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: ap-south-1
+
+custom:
+  service:
+    path: services/*/serverless.yml # glob pattern are supported 
+    strategy: parallel # deploy strategy, parallel or sequential, default: sequential 
+    only: # filter discovered services by service name   
+      - aws-serverless
+      - currency-serverless

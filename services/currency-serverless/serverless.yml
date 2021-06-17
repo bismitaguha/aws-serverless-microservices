@@ -1,0 +1,36 @@
+service: currency-serverless
+
+frameworkVersion: "2"
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: ap-south-1
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "arn:aws:dynamodb:ap-south-1:429937773353:table/currencyTable"
+
+functions:
+
+  get:
+    handler: currency_get.list
+    events:
+      - http:
+          path: currency/
+          method: get
+          cors: true
+
+  delete:
+    handler: currency_delete.delete
+    events:
+      - http:
+          path: currency/{id}
+          method: delete
+          cors: true
