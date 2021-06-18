@@ -6,7 +6,7 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 module.exports.delete = (event, context, callback) => {
   const params = {
-    TableName: "group12_table",
+    TableName: "stocksTable",
     Key: {
       id: event.pathParameters.id,
     },
@@ -27,7 +27,7 @@ module.exports.delete = (event, context, callback) => {
 
     // create a response
     const response = {
-      statusCode: 200,
+      statusCode: 204,
       body: JSON.stringify({}),
     };
     callback(null, response);
